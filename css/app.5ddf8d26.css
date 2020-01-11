@@ -1,0 +1,1 @@
+body{margin:0;padding:0}body #app{font-family:Avenir,Helvetica,Arial,sans-serif;color:#2c3e50;padding-top:2rem;display:grid;grid-template-columns:1fr 1fr 1fr}body #app>div{display:grid;grid-column:2/3}body #app>div section{margin:2rem 0}body .disclaimer{border:1px solid #005580;background:#cef;color:#005580;padding:.5rem 1rem}
