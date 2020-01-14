@@ -25,6 +25,7 @@
         <button v-on:click="clear">Clear</button>
       </form>
     </section>
+    <section ref="chart"></section>
     <section v-if="payments.length > 0">
       <table>
         <thead>
@@ -48,6 +49,7 @@
 
 <script>
 // @ is an alias to /src
+import * as d3 from "d3";
 
 export default {
   name: "home",
@@ -79,10 +81,29 @@ export default {
         this.payments.push(payment);
         loan = payment["remaining"];
       }
+
+      let svg = d3
+        .select(this.$refs["chart"])
+        .append("svg")
+        .append("g");
+
+      let line = d3.line()
+        .value(function(d) { return d.value; })(this.payments.map(x => x.amount + x.interest));
+
+      svg.data(
+        this.payments.map(x => {
+          return {
+            payment: x.amount,
+            interest: x.interest,
+            totalPayment: x.amount + x.interest
+          };
+        })
+      );
     },
     clear() {
       this.payments = [];
     }
   }
 };
+
 </script>
